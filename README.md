@@ -123,11 +123,6 @@ pnpm --filter @workspace/api-spec run codegen
 
 The current API implementation derives emotion classifications from deterministic transformations of submitted image and audio payloads. This provides a stable end-to-end development flow for UI, transport, validation, and persistence without requiring an external inference service in the current repository state.
 
-## Deployment
-
-The current public deployment is hosted on Replit:
-
-- [https://emotion-sense--jaadarsh143.replit.app/](https://emotion-sense--jaadarsh143.replit.app/)
 
 ## License
 
