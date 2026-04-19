@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: EmotionSense API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: emotions
+    description: Emotion detection operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /detect-face:
+    post:
+      operationId: detectFace
+      tags: [emotions]
+      summary: Detect face emotion
+      description: Analyzes a base64 image and returns detected facial emotion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetectFaceBody"
+      responses:
+        "200":
+          description: Face emotion detected
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmotionResult"
+        "400":
+          description: Bad request
+
+  /detect-voice:
+    post:
+      operationId: detectVoice
+      tags: [emotions]
+      summary: Detect voice emotion
+      description: Analyzes base64 audio and returns detected voice emotion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetectVoiceBody"
+      responses:
+        "200":
+          description: Voice emotion detected
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmotionResult"
+        "400":
+          description: Bad request
+
+  /emotion-logs:
+    get:
+      operationId: getEmotionLogs
+      tags: [emotions]
+      summary: Get emotion history
+      description: Returns the last N emotion detection logs
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 5
+      responses:
+        "200":
+          description: List of emotion logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmotionLog"
+
+  /emotion-stats:
+    get:
+      operationId: getEmotionStats
+      tags: [emotions]
+      summary: Get emotion statistics
+      description: Returns aggregated counts of detected emotions
+      responses:
+        "200":
+          description: Emotion statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmotionStats"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    DetectFaceBody:
+      type: object
+      properties:
+        image:
+          type: string
+          description: Base64-encoded image data
+      required:
+        - image
+
+    DetectVoiceBody:
+      type: object
+      properties:
+        audio:
+          type: string
+          description: Base64-encoded audio data
+      required:
+        - audio
+
+    EmotionResult:
+      type: object
+      properties:
+        emotion:
+          type: string
+          description: Detected emotion label
+        confidence:
+          type: number
+          description: Confidence score between 0 and 1
+        logId:
+          type: ["integer", "null"]
+          description: ID of the saved log entry
+        timestamp:
+          type: string
+          description: ISO timestamp of detection
+      required:
+        - emotion
+        - confidence
+        - logId
+        - timestamp
+
+    EmotionLog:
+      type: object
+      properties:
+        id:
+          type: integer
+        faceEmotion:
+          type: ["string", "null"]
+        voiceEmotion:
+          type: ["string", "null"]
+        faceConfidence:
+          type: ["number", "null"]
+        voiceConfidence:
+          type: ["number", "null"]
+        createdAt:
+          type: string
+      required:
+        - id
+        - faceEmotion
+        - voiceEmotion
+        - faceConfidence
+        - voiceConfidence
+        - createdAt
+
+    EmotionStats:
+      type: object
+      properties:
+        totalDetections:
+          type: integer
+        faceEmotionCounts:
+          type: object
+          additionalProperties:
+            type: integer
+        voiceEmotionCounts:
+          type: object
+          additionalProperties:
+            type: integer
+        mostCommonFaceEmotion:
+          type: ["string", "null"]
+        mostCommonVoiceEmotion:
+          type: ["string", "null"]
+      required:
+        - totalDetections
+        - faceEmotionCounts
+        - voiceEmotionCounts
+        - mostCommonFaceEmotion
+        - mostCommonVoiceEmotion
