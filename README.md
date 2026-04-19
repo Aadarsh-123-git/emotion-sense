@@ -1,10 +1,10 @@
-# Emotion Sense
+# Emotion Sense💁
 
 Emotion Sense is a TypeScript monorepo for real-time facial and voice emotion telemetry. The project combines a React-based frontend, an Express API, shared generated client and schema packages, and a Drizzle-backed persistence layer for storing emotion detection history and aggregate statistics.I made this with the help of Replit.app.
 
 Live deployment: [emotion-sense--jaadarsh143.replit.app](https://emotion-sense--jaadarsh143.replit.app/)
 
-## Overview
+## Overview🙂
 
 The application exposes two primary user flows:
 
@@ -13,7 +13,7 @@ The application exposes two primary user flows:
 
 Detection results are persisted as telemetry records and surfaced through a dashboard and history view. The frontend consumes the backend through generated API bindings, keeping request and response types aligned across the workspace.
 
-## Architecture
+## Architecture😎
 
 This repository is organized as a `pnpm` workspace:
 
@@ -32,7 +32,7 @@ This repository is organized as a `pnpm` workspace:
 `-- package.json            # Root workspace commands
 ```
 
-## Technical Stack
+## Technical Stack🧑‍💻
 
 - Language: TypeScript 5.9
 - Runtime: Node.js 24
@@ -42,7 +42,7 @@ This repository is organized as a `pnpm` workspace:
 - Data layer: PostgreSQL, Drizzle ORM
 - API contract: OpenAPI with generated client and validation packages
 
-## Key Features
+## Key Features☺️
 
 - Real-time face emotion detection workflow
 - Real-time voice emotion detection workflow
@@ -52,8 +52,7 @@ This repository is organized as a `pnpm` workspace:
 - Shared typed API surface between frontend and backend
 
 ## Repository Components
-
-### Frontend
+### Frontend ➬
 
 The frontend application lives in `artifacts/emotion-sense`. It provides:
 
@@ -62,7 +61,7 @@ The frontend application lives in `artifacts/emotion-sense`. It provides:
 - A historical archive page backed by the API
 - React Query-based data fetching using the generated workspace client
 
-### API Server
+### API Server🦾
 
 The backend lives in `artifacts/api-server`. It exposes endpoints for:
 
@@ -73,8 +72,7 @@ The backend lives in `artifacts/api-server`. It exposes endpoints for:
 
 Request and response validation is enforced through shared Zod schemas generated from the API contract.
 
-### Shared Libraries
-
+### Shared Libraries👨🏻‍🔬
 - `lib/api-spec` defines the API contract and code generation configuration
 - `lib/api-client-react` provides generated client bindings for the frontend
 - `lib/api-zod` provides generated DTO and schema types for runtime validation
