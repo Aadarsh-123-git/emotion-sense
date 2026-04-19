@@ -1,6 +1,6 @@
 # Emotion Sense
 
-Emotion Sense is a TypeScript monorepo for real-time facial and voice emotion telemetry. The project combines a React-based frontend, an Express API, shared generated client and schema packages, and a Drizzle-backed persistence layer for storing emotion detection history and aggregate statistics.
+Emotion Sense is a TypeScript monorepo for real-time facial and voice emotion telemetry. The project combines a React-based frontend, an Express API, shared generated client and schema packages, and a Drizzle-backed persistence layer for storing emotion detection history and aggregate statistics.I made this with the help of Replit.app.
 
 Live deployment: [emotion-sense--jaadarsh143.replit.app](https://emotion-sense--jaadarsh143.replit.app/)
 
